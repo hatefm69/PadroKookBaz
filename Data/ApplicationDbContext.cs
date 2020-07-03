@@ -1,7 +1,7 @@
 ﻿using Common.Utilities;
 using Entities;
-using Entities.User;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+//using Entities.User;
+//using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;

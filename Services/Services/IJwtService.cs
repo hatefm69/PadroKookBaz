@@ -1,11 +1,11 @@
-﻿using Entities;
-using Entities.User;
-using System.Threading.Tasks;
+﻿//using Entities;
+//using Entities.User;
+//using System.Threading.Tasks;
 
-namespace Services
-{
-    public interface IJwtService
-    {
-        Task<AccessToken> GenerateAsync(User user);
-    }
-}
+//namespace Services
+//{
+//    public interface IJwtService
+//    {
+//        Task<AccessToken> GenerateAsync(User user);
+//    }
+//}

@@ -1,11 +1,9 @@
 ﻿using Common.Utilities;
 using Data.Repositories;
-using Entities;
+using Entities.Padro;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Services.DataInitializer
 {

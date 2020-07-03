@@ -53,7 +53,7 @@ namespace MyApi
             services.AddDbContext(Configuration);
             //services.AddScoped<GetInternetAddressAttribute>
 
-            services.AddCustomIdentity(_siteSetting.IdentitySettings);
+            //services.AddCustomIdentity(_siteSetting.IdentitySettings);
             services.AddMinimalMvc();
             services.AddControllersWithViews();
 

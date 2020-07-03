@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Entities
+namespace Entities.Padro
 {
     /// <summary>
-    /// کلاس برای تیبل 
+    /// جدول اطلاعات تماس
     /// </summary>
     public class Contact : BaseEntity
     {

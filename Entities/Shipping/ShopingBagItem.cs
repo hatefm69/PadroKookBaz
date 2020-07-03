@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Entities
 {
+    /// <summary>
+    /// جدول اطلاعات سفارش کوک باز
+    /// </summary>
     public class ShopingBagItem : BaseEntity, IMyEntity
     {
         public OrderDetail OrderDetail { get; set; }

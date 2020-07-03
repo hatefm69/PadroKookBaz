@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Entities
+namespace Entities.Padro
 {
+    /// <summary>
+    /// جدول جزئیات و کالاهای بیجک
+    /// </summary>
     public class Parcel : BaseEntity, IMyEntity
     {
         public int id { get; set; }

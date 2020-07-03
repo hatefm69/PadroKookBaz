@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Entities
+namespace Entities.Padro
 {
     /// <summary>
-    /// کلاس برای تیبل 
+    /// جدول نوع اطلاعات تماس
     /// </summary>
     public class ContactType : BaseEntity<ContactTypeEnum>
     {

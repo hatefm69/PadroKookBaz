@@ -3,8 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 
-namespace Entities
+namespace Entities.Padro
 {
+    /// <summary>
+    /// جدول بیجک
+    /// </summary>
     public class Order : BaseEntity, IMyEntity
     {
         public Person Receiver { get; set; }

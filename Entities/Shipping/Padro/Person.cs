@@ -2,8 +2,11 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Collections.Generic;
 
-namespace Entities
+namespace Entities.Padro
 {
+    /// <summary>
+    /// جدول مشتریان
+    /// </summary>
     public class Person : BaseEntity, IMyEntity
     {
         public string Name { get; set; }

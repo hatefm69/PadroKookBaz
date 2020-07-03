@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Entities
 {
     /// <summary>
-    /// کلاس برای تیبل 
+    /// جدول اطلاعات سفارش دریافتی از سیستم کوکباز
     /// </summary>
     public class OrderDetail : BaseEntity, IMyEntity
     {
