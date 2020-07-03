@@ -4,6 +4,21 @@
         <name>MyApi</name>
     </assembly>
     <members>
+        <member name="T:MyApi.Controllers.Api.v1.OrderController">
+            <summary>
+            بیجک
+            </summary>
+        </member>
+        <member name="T:MyApi.Controllers.Api.v1.OrderDetailController">
+            <summary>
+            اطلاعات کوکباز
+            </summary>
+        </member>
+        <member name="T:MyApi.Controllers.Api.v1.PersonController">
+            <summary>
+            اطلاعات فروشندگان و خریداران
+            </summary>
+        </member>
         <member name="T:Models.Shipping.OrderDetailDTO">
             <summary>
             جدول اطلاعات سفارش دریافتی از سیستم کوکباز
