@@ -78,8 +78,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Shipping\" />
-  </ItemGroup>
-
 </Project>

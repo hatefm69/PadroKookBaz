@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Entities;
+using WebFramework.Api;
 
-namespace Entities
+namespace Models.Shipping
 {
     /// <summary>
     /// جدول اطلاعات سفارش کوک باز
     /// </summary>
-    public class ShopingBagItem : BaseEntity, IMyEntity
+    public class ShopingBagItemDTO :BaseDto<ShopingBagItemDTO, ShopingBagItem>
     {
-        public OrderDetail OrderDetail { get; set; }
+        public OrderDetailDTO OrderDetail { get; set; }
         public int OrderDetail_Id { get; set; }
         public decimal Discount { get; set; }
         public int CurrencyId { get; set; }
@@ -25,13 +25,5 @@ namespace Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-    }
-    internal class ShopingBagItemConfiguration : IEntityTypeConfiguration<ShopingBagItem>
-    {
-        public void Configure(EntityTypeBuilder<ShopingBagItem> builder)
-        {
-            builder.ToTable(nameof(OrderDetail), nameof(SchemaEnum.KookBaz));
-            builder.HasOne(z => z.OrderDetail).WithMany(z => z.Items).HasForeignKey(z => z.OrderDetail_Id);
-        }
     }
 }
