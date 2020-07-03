@@ -12,7 +12,7 @@ namespace WebFramework.Session
         public static void AddSessionService(this IServiceCollection services)
         {
 
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
             services.AddSession();
         }
         public static void UseSessionService(this IApplicationBuilder app)

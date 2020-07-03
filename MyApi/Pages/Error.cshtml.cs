@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace WebApplication3.Pages
 {
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class ErrorModel : PageModel
     {
         private readonly ILogger<ErrorModel> _logger;

@@ -38,7 +38,7 @@ namespace MyApi
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
 
-            services.AddResponseCaching();
+            //services.AddResponseCaching();
 
             services.AddSession(
            //    z=> { z.Cookie.IsEssential = true;
@@ -94,8 +94,8 @@ namespace MyApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsProduction())
-                app.UseResponseCaching();
+            //if (env.IsProduction())
+            //    app.UseResponseCaching();
             app.IntializeDatabase();
 
             if (env.IsDevelopment())
