@@ -8,8 +8,8 @@ namespace Models.Shipping
     /// </summary>
     public class ShopingBagItemDTO :BaseDto<ShopingBagItemDTO, ShopingBagItem>
     {
-        public OrderDetailDTO OrderDetail { get; set; }
-        public int OrderDetail_Id { get; set; }
+        //public OrderDetailDTO OrderDetail { get; set; }
+        //public int OrderDetail_Id { get; set; }
         public decimal Discount { get; set; }
         public int CurrencyId { get; set; }
         //public int Attributes { get; set; }
