@@ -2,11 +2,8 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Security.Principal;
-using System.Text;
 
-namespace Entities.SqlServer
+namespace Entities
 {
     public class Order : BaseEntity, IMyEntity
     {
