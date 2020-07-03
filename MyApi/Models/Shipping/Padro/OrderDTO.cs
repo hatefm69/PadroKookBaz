@@ -5,26 +5,30 @@ using WebFramework.Api;
 
 namespace Models.Shipping
 {
+    public class OrderResultVM
+    {
+        public string order_id { get; set; }
+    }
     /// <summary>
     /// جدول بیجک
     /// </summary>
-    public class OrderDTO :BaseDto<OrderDTO, Order>
+    public class OrderDTO 
     {
-        public PersonDTO Receiver { get; set; }
-        public int Receiver_Id { get; set; }
-        public PersonDTO Sender { get; set; }
-        public int Sender_Id { get; set; }
-        public string Provider_code { get; set; }
-        public int Payment_type { get; set; }
-        public string Receiver_comment { get; set; }
-        public IEnumerable<ParcelDTO> Parcels { get; set; }
-        public string Order_id { get; set; }
+        public PersonDTO sender { get; set; }
+        public PersonDTO receiver { get; set; }
+     
+    
+        public string provider_code { get; set; }
+        public int payment_type { get; set; }
+        public string receiver_comment { get; set; }
+        public IEnumerable<ParcelDTO> parcels { get; set; }
+        //public string Order_id { get; set; }
 
 
-        public DateTime Pickup_date_Dm { get; set; }
-        public string Pickup_date_Ds { get; set; }
-        public string Comment { get; set; }
-        public int Option_id { get; set; }
-        public string  Status { get; set; }
+        //public DateTime Pickup_date_Dm { get; set; }
+        //public string Pickup_date_Ds { get; set; }
+        //public string Comment { get; set; }
+        //public int Option_id { get; set; }
+        //public string  Status { get; set; }
     }
 }

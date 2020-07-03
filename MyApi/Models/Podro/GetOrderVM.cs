@@ -15,10 +15,10 @@ namespace MyApi.Models.Podro
         public decimal discount { get; set; }
         public decimal sale_price { get; set; }
         public DateTime pickup_time { get; set; }
-        public Time pickup_to_time { get; set; }
+        public string pickup_to_time { get; set; }
         public int payment_type { get; set; }
         public string status { get; set; }
         public string provider_code { get; set; }
-        public OrderDTO order_detail { get; set; }
+        //public OrderDTO order_detail { get; set; }
     }
 }

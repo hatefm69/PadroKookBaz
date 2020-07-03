@@ -15,7 +15,7 @@ namespace Models.Shipping
         //public int Attributes { get; set; }
         public int MaxCount { get; set; }
         public int ObjectId { get; set; }
-        public int id { get; set; }
+        //public int id { get; set; }
         public int PaymentType { get; set; }
         public int AllowCountGiftUseUser { get; set; }
         public int GiftId { get; set; }

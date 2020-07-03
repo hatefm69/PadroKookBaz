@@ -8,7 +8,7 @@ namespace Entities.Padro
     /// </summary>
     public class Parcel : BaseEntity, IMyEntity
     {
-        public int id { get; set; }
+        //public int id { get; set; }
         public int Weight { get; set; }
         public decimal Value { get; set; }
         public string Content { get; set; }

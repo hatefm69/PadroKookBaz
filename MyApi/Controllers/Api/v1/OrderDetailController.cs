@@ -12,7 +12,7 @@ namespace MyApi.Controllers.Api.v1
     [ApiVersion("1")]
     public class OrderDetailController : CrudController<OrderDetailDTO, OrderDetail>
     {
-        public OrderDetailController(IRepository<OrderDetail> repository):base(repository)
+        public OrderDetailController(IRepository<OrderDetail> repository) : base(repository)
         {
 
         }

@@ -9,24 +9,17 @@ namespace Models.Shipping
     /// <summary>
     /// جدول مشتریان
     /// </summary>
-    public class PersonDTO : BaseDto<PersonDTO,Person>
+    public class PersonDTO //: BaseDto<PersonDTO,Person>
     {
-        public string Name { get; set; }
-        public IEnumerable<ContactDTO> Contacts { get; set; }
-        public IEnumerable<OrderDTO> Orders { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public GenderType Gender { get; set; }
-        public string Image { get; set; }
-        public string BirthDate_Ds { get; set; }
-        public string BirthDate_Dm { get; set; }
-        public DateTimeOffset? LastLoginDate { get; set; }
-        public string NationalCode { get; set; }
-        public string Email { get; set; }
-        public string Cell { get; set; }
-
+        public string name { get; set; }
+        public ContactDTO2 contact { get; set; }
+    }
+    public class ContactDTO2
+    {
+        public string postal_code { get; set; }
+        public string city { get; set; }
+        public string address { get; set; }
+        public string phone_number { get; set; }
+        public string national_code { get; set; }
     }
  }

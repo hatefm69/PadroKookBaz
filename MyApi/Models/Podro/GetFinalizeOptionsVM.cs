@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace MyApi.Models.Podro
 {
+    public class PostFinalizeVM
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+    }
+
     public class GetFinalizeOptionsVM
     {
         public IEnumerable<Option> Options { get; set; }
@@ -14,7 +20,7 @@ namespace MyApi.Models.Podro
     public class Option
     {
         public int Option_id { get; set; }
-        public int Title { get; set; }
+        public string Title { get; set; }
         public int From { get; set; }
         public int To { get; set; }
     }

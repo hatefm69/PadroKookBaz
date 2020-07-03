@@ -4,19 +4,14 @@
         <name>MyApi</name>
     </assembly>
     <members>
-        <member name="T:MyApi.Controllers.Api.v1.OrderController">
-            <summary>
-            بیجک
-            </summary>
-        </member>
         <member name="T:MyApi.Controllers.Api.v1.OrderDetailController">
             <summary>
             اطلاعات کوکباز
             </summary>
         </member>
-        <member name="T:MyApi.Controllers.Api.v1.PersonController">
+        <member name="T:MyApi.Models.Shipping.Padro.Delivery_optionsDTO">
             <summary>
-            اطلاعات فروشندگان و خریداران
+            بارگذاري گزينه هاي ارسال كالا 
             </summary>
         </member>
         <member name="T:Models.Shipping.OrderDetailDTO">
@@ -42,6 +37,11 @@
         <member name="T:Models.Shipping.ParcelDTO">
             <summary>
             جدول جزئیات و کالاهای بیجک
+            </summary>
+        </member>
+        <member name="T:Models.Shipping.Dimension">
+            <summary>
+            خصوصيات كالا
             </summary>
         </member>
         <member name="T:Models.Shipping.PersonDTO">

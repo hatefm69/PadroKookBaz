@@ -33,7 +33,7 @@ namespace MyApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-
+            services.AddHttpClient();
             //services.AddResponseCaching();
 
             services.AddSession(
@@ -67,7 +67,7 @@ namespace MyApi
             //services.AddRabbit(Configuration, _siteSetting.RabbitMQSettings);
 
             services.AddSessionService();
-            services.AddReactPage();
+            //services.AddReactPage();
 
             services.AddCors(options =>
             {
@@ -92,7 +92,7 @@ namespace MyApi
         {
             //if (env.IsProduction())
             //    app.UseResponseCaching();
-            app.IntializeDatabase();
+            //app.IntializeDatabase();
 
             if (env.IsDevelopment())
                 app.UseCustomExceptionHandler();
@@ -148,7 +148,7 @@ namespace MyApi
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
             });
-            app.UseReactPage(env);
+            //app.UseReactPage(env);
         }
 
 
