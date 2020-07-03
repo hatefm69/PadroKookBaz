@@ -92,7 +92,7 @@ namespace MyApi
         {
             //if (env.IsProduction())
             //    app.UseResponseCaching();
-            //app.IntializeDatabase();
+            app.IntializeDatabase();
 
             if (env.IsDevelopment())
                 app.UseCustomExceptionHandler();
