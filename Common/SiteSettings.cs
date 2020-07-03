@@ -9,7 +9,7 @@
         public IdentitySettings IdentitySettings { get; set; }
         public string PassKeyEncrypt { get; set; }
         public RabbitOptions RabbitMQSettings { get; set; }
-        
+        public string PordoUrl { get; set; }
     }
 
     public class IdentitySettings
