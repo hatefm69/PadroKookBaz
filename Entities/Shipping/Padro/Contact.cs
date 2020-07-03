@@ -6,7 +6,7 @@ namespace Entities.Padro
     /// <summary>
     /// جدول اطلاعات تماس
     /// </summary>
-    public class Contact : BaseEntity
+    public class Contact : BaseEntity,IMyEntity
     {
         public string Value { get; set; }
         public ContactType ContactType { get; set; }

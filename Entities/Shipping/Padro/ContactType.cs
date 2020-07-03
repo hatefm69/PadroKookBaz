@@ -8,7 +8,7 @@ namespace Entities.Padro
     /// <summary>
     /// جدول نوع اطلاعات تماس
     /// </summary>
-    public class ContactType : BaseEntity<ContactTypeEnum>
+    public class ContactType : BaseEntity<ContactTypeEnum>,IMyEntity
     {
         public string Value { get; set; }
         public IEnumerable<Contact> Contacts { get; set; }
@@ -28,7 +28,7 @@ namespace Entities.Padro
         [Display(Name = "کد پستی")]
         Postal_code = 6,
         [Display(Name = "شهر")]
-        city = 6
+        city = 7
     }
     internal class ContactTypeConfiguration : IEntityTypeConfiguration<ContactType>
     {

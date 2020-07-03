@@ -36,8 +36,8 @@ namespace Entities.Padro
             builder.ToTable(nameof(Person), nameof(SchemaEnum.KookBaz));
 
             builder.HasMany(z => z.Contacts).WithOne(z => z.Person).HasForeignKey(z => z.Persion_Id);
-            builder.HasMany(z => z.Orders).WithOne(z => z.Receiver).HasForeignKey(z => z.Receiver_Id);
-            builder.HasMany(z => z.Orders).WithOne(z => z.Sender).HasForeignKey(z => z.Sender_Id);
+            //builder.HasMany(z => z.Orders).WithOne(z => z.Receiver).HasForeignKey(z => z.Receiver_Id);
+            //builder.HasMany(z => z.Orders).WithOne(z => z.Sender).HasForeignKey(z => z.Sender_Id);
         }
     }
 
