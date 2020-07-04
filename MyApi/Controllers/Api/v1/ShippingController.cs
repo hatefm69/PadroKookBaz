@@ -181,5 +181,28 @@ namespace MyApi.Controllers.Api.v1
             return api;
         }
 
+
+    //    public virtual async Task<ApiResult>GetKookBazOrder(int id= 2608)
+    //    {
+
+    //        string url = siteSettings.PordoUrl;
+    //        var client = _clientFactory.CreateClient();
+    //        var request = new HttpRequestMessage(HttpMethod.Get, url + $"/orders/{id}");
+
+    //        //StringContent content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+    //        //request.Content = content;
+
+    //        request.Headers.Add("Authorization", "Bearer " + Token);
+
+    //        var response = await client.SendAsync(request);
+    //        //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+    //        //    return Unauthorized();
+
+    //        var api = Newtonsoft.Json.JsonConvert.DeserializeObject<GetOrderVM>(await response.Content.ReadAsStringAsync());
+
+
+    //        return Ok();
+    //    }
+
     }
 }
