@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200703203649_init")]
+    [Migration("20200705142338_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -155,6 +155,9 @@ namespace Data.Migrations
 
                     b.Property<int>("Option_id")
                         .HasColumnType("int");
+
+                    b.Property<string>("Order_Id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Payment_type")
                         .HasColumnType("int");

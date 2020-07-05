@@ -154,6 +154,9 @@ namespace Data.Migrations
                     b.Property<int>("Option_id")
                         .HasColumnType("int");
 
+                    b.Property<string>("Order_Id")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Payment_type")
                         .HasColumnType("int");
 

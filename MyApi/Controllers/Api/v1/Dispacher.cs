@@ -54,16 +54,18 @@ namespace MyApi.Controllers.Api.v1
 
             var options = await new Padro(siteSettings.PordoUrl, _clientFactory).FinalizeOrderOptions(padroOrders.order_id, Token);
 
+
+
             _orderRepository.AddAsync(new Order
             {
                 Sender=new Person
                 {
                     Name=model.sender.name
                 } ,
-                Receiver=new Person
-                {
-                    Name=model.sender.name
-                },
+                //Receiver=new Person
+                //{
+                //    Name=model.sender.name
+                //},
                 Parcels = model.parcels.Select(x=>new Parcel
                 {
                    Content=x.content,

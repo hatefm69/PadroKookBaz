@@ -160,7 +160,8 @@ namespace Data.Migrations
                     Pickup_date_Ds = table.Column<string>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
                     Option_id = table.Column<int>(nullable: false),
-                    Status = table.Column<string>(nullable: true)
+                    Status = table.Column<string>(nullable: true),
+                    Order_Id = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
