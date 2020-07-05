@@ -24,6 +24,7 @@ namespace Data
 
             modelBuilder.RegisterAllEntities<IMyEntity>(entitiesAssembly);
             modelBuilder.RegisterEntityTypeConfiguration(entitiesAssembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(entitiesAssembly);
             modelBuilder.AddRestrictDeleteBehaviorConvention();
             modelBuilder.AddSequentialGuidForIdConvention();
             modelBuilder.AddPluralizingTableNameConvention();

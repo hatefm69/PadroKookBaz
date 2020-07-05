@@ -124,11 +124,6 @@
             بارگذاري گزينه هاي ارسال كالا 
             </summary>
         </member>
-        <member name="T:Models.Shipping.OrderDetailDTO">
-            <summary>
-            جدول اطلاعات سفارش دریافتی از سیستم کوکباز
-            </summary>
-        </member>
         <member name="T:Models.Shipping.ContactDTO">
             <summary>
             جدول اطلاعات تماس
@@ -157,11 +152,6 @@
         <member name="T:Models.Shipping.PersonDTO">
             <summary>
             جدول مشتریان
-            </summary>
-        </member>
-        <member name="T:Models.Shipping.ShopingBagItemDTO">
-            <summary>
-            جدول اطلاعات سفارش کوک باز
             </summary>
         </member>
     </members>

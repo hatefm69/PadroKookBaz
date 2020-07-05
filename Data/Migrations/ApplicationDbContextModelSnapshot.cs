@@ -19,57 +19,12 @@ namespace Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Entities.OrderDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Create_Dm")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Create_Ds")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsNeedAddress")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastUpdate_Dm")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastUpdate_Ds")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("MinShipingAmountForFree")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Mobile")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("ShipingAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrderDetails");
-                });
-
             modelBuilder.Entity("Entities.Padro.Contact", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ContactTypeId")
-                        .HasColumnType("int");
 
                     b.Property<int>("ContactType_Id")
                         .HasColumnType("int");
@@ -89,19 +44,18 @@ namespace Data.Migrations
                     b.Property<int>("Persion_Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PersonId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContactTypeId");
+                    b.HasIndex("ContactType_Id");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("Persion_Id");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts","KookBaz");
                 });
 
             modelBuilder.Entity("Entities.Padro.ContactType", b =>
@@ -122,11 +76,13 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContactTypes");
+                    b.ToTable("ContactTypes","KookBaz");
                 });
 
             modelBuilder.Entity("Entities.Padro.Order", b =>
@@ -169,6 +125,9 @@ namespace Data.Migrations
                     b.Property<string>("Provider_code")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Receiver_Id")
+                        .HasColumnType("int");
+
                     b.Property<string>("Receiver_comment")
                         .HasColumnType("nvarchar(max)");
 
@@ -183,9 +142,11 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Receiver_Id");
+
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders","KookBaz");
                 });
 
             modelBuilder.Entity("Entities.Padro.Parcel", b =>
@@ -216,9 +177,6 @@ namespace Data.Migrations
                     b.Property<string>("LastUpdate_Ds")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Order_Id")
                         .HasColumnType("int");
 
@@ -233,9 +191,9 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("Order_Id");
 
-                    b.ToTable("Parcels");
+                    b.ToTable("Parcels","KookBaz");
                 });
 
             modelBuilder.Entity("Entities.Padro.Person", b =>
@@ -294,92 +252,32 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("People");
-                });
-
-            modelBuilder.Entity("Entities.ShopingBagItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AllowCountGiftUseUser")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Create_Dm")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Create_Ds")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CurrencyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("GiftId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastUpdate_Dm")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastUpdate_Ds")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MaxCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ObjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OrderDetailId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderDetail_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PaymentType")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderDetailId");
-
-                    b.ToTable("ShopingBagItems");
+                    b.ToTable("People","KookBaz");
                 });
 
             modelBuilder.Entity("Entities.Padro.Contact", b =>
                 {
                     b.HasOne("Entities.Padro.ContactType", "ContactType")
                         .WithMany("Contacts")
-                        .HasForeignKey("ContactTypeId");
+                        .HasForeignKey("ContactType_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Entities.Padro.Person", "Person")
                         .WithMany("Contacts")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("Persion_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entities.Padro.Order", b =>
                 {
-                    b.HasOne("Entities.Padro.Person", "Sender")
+                    b.HasOne("Entities.Padro.Person", "Receiver")
                         .WithMany("Orders")
+                        .HasForeignKey("Receiver_Id");
+
+                    b.HasOne("Entities.Padro.Person", "Sender")
+                        .WithMany()
                         .HasForeignKey("SenderId");
                 });
 
@@ -387,14 +285,9 @@ namespace Data.Migrations
                 {
                     b.HasOne("Entities.Padro.Order", "Order")
                         .WithMany("Parcels")
-                        .HasForeignKey("OrderId");
-                });
-
-            modelBuilder.Entity("Entities.ShopingBagItem", b =>
-                {
-                    b.HasOne("Entities.OrderDetail", "OrderDetail")
-                        .WithMany("Items")
-                        .HasForeignKey("OrderDetailId");
+                        .HasForeignKey("Order_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
