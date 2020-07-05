@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyApi.Models.KookBaz
 {
+
     public class KookBazOrderVM
     {
         public PersonDTO2 Sender { get; set; }
@@ -18,5 +19,19 @@ namespace MyApi.Models.KookBaz
         public string mobile { get; set; }
         public string postalCode { get; set; }
         public string nationalCode { get; set; }
+    }
+
+    public static class extention
+    {
+        public static ContactDTO2 To(this PersonDTO2 model)
+        {
+            return new ContactDTO2
+            {
+                address = model.address,
+                national_code = model.nationalCode,
+                phone_number = model.mobile,
+                postal_code = model.postalCode
+            };
+        }
     }
 }

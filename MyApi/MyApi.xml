@@ -4,6 +4,121 @@
         <name>MyApi</name>
     </assembly>
     <members>
+        <member name="M:MyApi.Controllers.Api.v1.DispacherController.SaveOrder(System.Int32,Models.Shipping.OrderDTO,System.Threading.CancellationToken)">
+            <summary>
+            ذخیره سفارش و نمایش زمان های تحویل
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.DispacherController.GetCost(MyApi.Models.Shipping.Padro.Delivery_optionsDTO,System.Threading.CancellationToken)">
+            <summary>
+            نمایش کرایه بار شرکت ها
+            </summary>
+            <param name="model"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.DispacherController.FinalizeOrder(System.String,MyApi.Models.Podro.finalizeDTO,System.Threading.CancellationToken)">
+            <summary>
+            فاینالی کردن سفارش
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.DispacherController.CancelOrder(System.String,System.Threading.CancellationToken)">
+            <summary>
+            لغو عملیات باربری
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.DispacherController.ViewOrders(System.String)">
+            <summary>
+            نمایش اطلاعات باربری
+            </summary>
+            <param name="cell"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MyApi.Controllers.Api.v1.KookBazController">
+            <summary>
+            دریافت اطلاعات از سیستم کوک باز
+            </summary>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.KookBazController.Order(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            دریافت سفارش از سیستم کوک باز
+            </summary>
+            <param name="id">2608</param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MyApi.Controllers.Api.v1.PadroController">
+            <summary>
+            اتصال به سیستم پادرو
+            </summary>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.PadroController.Cities(System.Threading.CancellationToken)">
+            <summary>
+            دریافت شهر های کشور
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.PadroController.CancelOrder(System.String,System.Threading.CancellationToken)">
+            <summary>
+            باطل کردن سفارش
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.PadroController.FinalizeOrderOptions(System.String,System.Threading.CancellationToken)">
+            <summary>
+            گزینه های انتخاب باربری انتخابی برای فاینال کردن سفارش
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.PadroController.FinalizeOrder(System.String,MyApi.Models.Podro.finalizeDTO,System.Threading.CancellationToken)">
+            <summary>
+            فاینالی کردن سفارش
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.PadroController.Orders(Models.Shipping.OrderDTO,System.Threading.CancellationToken)">
+            <summary>
+            ثبت سفارش
+            </summary>
+            <param name="model"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.PadroController.DeliveryOption(MyApi.Models.Shipping.Padro.Delivery_optionsDTO,System.Threading.CancellationToken)">
+            <summary>
+            شرکتهای سفارش گیرنده با قیمت
+            </summary>
+            <param name="model"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyApi.Controllers.Api.v1.PadroController.GetOrder(System.String,System.Threading.CancellationToken)">
+            <summary>
+            نمایش وضعیت سفارش
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:MyApi.Models.Shipping.Padro.Delivery_optionsDTO">
             <summary>
             بارگذاري گزينه هاي ارسال كالا 

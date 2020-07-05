@@ -10,8 +10,8 @@ namespace Entities.Padro
     /// </summary>
     public class Order : BaseEntity, IMyEntity
     {
-        //public Person Receiver { get; set; }
-        //public int? Receiver_Id { get; set; }
+        public Person Receiver { get; set; }
+        public int? Receiver_Id { get; set; }
         public Person Sender { get; set; }
         public int? Sender_Id { get; set; }
         public string Provider_code { get; set; }
@@ -25,6 +25,7 @@ namespace Entities.Padro
         public string Comment { get; set; }
         public int Option_id { get; set; }
         public string  Status { get; set; }
+        public string Order_Id { get; set; }
     }
     internal class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
