@@ -19,6 +19,7 @@ namespace MyApi.Models.KookBaz
         public string mobile { get; set; }
         public string postalCode { get; set; }
         public string nationalCode { get; set; }
+        public string fullName { get; set; }
     }
 
     public static class extention

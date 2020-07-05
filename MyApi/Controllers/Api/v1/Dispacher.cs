@@ -46,16 +46,32 @@ namespace MyApi.Controllers.Api.v1
         {
             var kookbaz = await new KookBaz(_clientFactory).getOrder(id, Token);
             model.sender.contact = kookbaz.Sender.To();
+            model.sender.name = kookbaz.Sender.fullName;
+
             model.receiver.contact = kookbaz.Receiver.To();
+            model.receiver.name = kookbaz.Receiver.fullName;
             var padroOrders = await new Padro(siteSettings.PordoUrl, _clientFactory).orders(model, padroToken);
 
             var options = await new Padro(siteSettings.PordoUrl, _clientFactory).FinalizeOrderOptions(padroOrders.order_id, Token);
 
             _orderRepository.AddAsync(new Order
             {
-                //Sender = model.sender,
-                //Receiver = model.receiver
-                //Parcels = model.parcels,
+                Sender=new Person
+                {
+                    Name=model.sender.name
+                } ,
+                Receiver=new Person
+                {
+                    Name=model.sender.name
+                },
+                Parcels = model.parcels.Select(x=>new Parcel
+                {
+                   Content=x.content,
+                    Weight=x.weight,
+                    Height=x.dimension.height,
+                    Width=x.dimension.width,
+                     Depth=x.dimension.depth
+                }).ToList(),
                 Receiver_comment = model.receiver_comment,
                 Payment_type = model.payment_type,
                 Provider_code = model.provider_code,
@@ -92,8 +108,10 @@ namespace MyApi.Controllers.Api.v1
         {
             //save State
             var order = _orderRepository.Table.FirstOrDefault(z => z.Order_Id == id);
+            order.Pickup_date_Dm = model.Pickup_date;
             order.Option_id = model.Option_id;
             order.Status = "نهایی";
+            order.Comment = model.Comment;
             await _orderRepository.UpdateAsync(order, cancellationToken);
             return await new Padro(siteSettings.PordoUrl, _clientFactory).FinalizeOrder(id, model, padroToken);
         }
@@ -123,9 +141,9 @@ namespace MyApi.Controllers.Api.v1
         /// </summary>
         /// <param name="cell"></param>
         /// <returns></returns>
-        public async Task ViewOrders(string cell)
+        public async Task ViewOrders(int id)
         {
-            var order = _orderRepository.Table.Where(z => z.Sender.Cell == cell).ToListAsync();
+            var order = _orderRepository.Table.Where(z => z.Id == id).ToListAsync();
             //show Orders
         }
     }

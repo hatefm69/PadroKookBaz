@@ -16,10 +16,7 @@ namespace Data.Repositories
         where TEntity : class, IEntity
     {
         protected  DbContext DbContext;
-
         public DbContext Database { get { return DbContext; }set { DbContext = value; } }
-
-
         public DbSet<TEntity> Entities { get; }
         public virtual IQueryable<TEntity> Table => Entities;
         public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();

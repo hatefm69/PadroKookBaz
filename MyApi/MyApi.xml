@@ -38,7 +38,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:MyApi.Controllers.Api.v1.DispacherController.ViewOrders(System.String)">
+        <member name="M:MyApi.Controllers.Api.v1.DispacherController.ViewOrders(System.Int32)">
             <summary>
             نمایش اطلاعات باربری
             </summary>
