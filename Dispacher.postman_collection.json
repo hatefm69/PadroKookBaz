@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "c59b9cf8-67b8-4ed7-8a93-71bf5460dbf9",
+		"name": "Dispacher",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetCities",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44339/api/v1/Dispacher/GetCities",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44339",
+					"path": [
+						"api",
+						"v1",
+						"Dispacher",
+						"GetCities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SaveOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"provider_code\": \"chapar\",\r\n  \"payment_type\": 1,\r\n  \"receiver_comment\": \"comment body\",\r\n  \"parcels\": [\r\n    {\r\n      \"weight\": 200,\r\n      \"value\": 2000,\r\n      \"dimension\": {\r\n        \"width\": 123,\r\n        \"height\": 20,\r\n        \"depth\": 10\r\n      },\r\n      \"content\": \"Phone\"\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44339/api/v1/Dispacher/SaveOrder?id=2608",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44339",
+					"path": [
+						"api",
+						"v1",
+						"Dispacher",
+						"SaveOrder"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2608"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"source_city\": \"2301\",\r\n  \"destination_city\": \"2301\",\r\n  \"parcels\": [\r\n    {\r\n      \"weight\": 200,\r\n      \"value\": 2000,\r\n      \"dimension\": {\r\n        \"width\": 123,\r\n        \"height\": 20,\r\n        \"depth\": 10\r\n      }\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44339/api/v1/Dispacher/GetCost",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44339",
+					"path": [
+						"api",
+						"v1",
+						"Dispacher",
+						"GetCost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FinalizeOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pickup_date\": \"2020-07-06\",\r\n    \"option_id\": 0,\r\n    \"comment\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44339/api/v1/Dispacher/FinalizeOrder?id=124ec2d7-d6c4-4d17-998f-7c21c6bf3e48",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44339",
+					"path": [
+						"api",
+						"v1",
+						"Dispacher",
+						"FinalizeOrder"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "124ec2d7-d6c4-4d17-998f-7c21c6bf3e48"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ViewOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
