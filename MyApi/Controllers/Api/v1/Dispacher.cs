@@ -211,7 +211,7 @@ namespace MyApi.Controllers.Api.v1
        [HttpGet("[action]")]
         public async Task<ApiResult<IEnumerable<ordervm2>>> ViewOrders(int id)
         {
-            var orders =await _orderRepository.Table.Where(z => z.KookBaz_Id == id).Include(z=>z.Sender).ThenInclude(z=>z.Contacts).Include(z=>z.Receiver).ThenInclude(z=>z.Contacts).Include(z=>z.Parcels).Select(z=> ordervm2.FromEntity(z)).ToListAsync();
+            var orders =await _orderRepository.Table.Where(z => z.KookBaz_Id == id).Include(z=>z.Sender).ThenInclude(z=>z.Contacts).ThenInclude(z=>z.ContactType).Include(z=>z.Receiver).ThenInclude(z=>z.Contacts).Include(z=>z.Parcels).Select(z=> ordervm2.FromEntity(z)).ToListAsync();
             return orders;
             //show Orders
         }

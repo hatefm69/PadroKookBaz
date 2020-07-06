@@ -57,7 +57,7 @@ namespace MyApi.Models.Podro
     public class PersonV2 : BaseDto<PersonV2, Person>
     {
         public string Name { get; set; }
-        public IEnumerable<Contact> Contacts { get; set; }
+        public IEnumerable<ContactVM> Contacts { get; set; }
         //public IEnumerable<Order> Orders { get; set; }
 
         //[Required]
@@ -73,7 +73,16 @@ namespace MyApi.Models.Podro
         public string Email { get; set; }
         public string Cell { get; set; }
     }
-
+    public class ContactVM:BaseDto<ContactVM, Contact>
+    {
+        public string Value { get; set; }
+        public ContactTypeVM ContactType { get; set; }
+        //public ContactTypeEnum ContactType_Id { get; set; }
+    }
+    public class ContactTypeVM:BaseDto<ContactTypeVM, ContactType, ContactTypeEnum>
+    {
+        public string Value { get; set; }
+    }
     public class Parcelv2 : BaseDto<Parcelv2, Parcel>
     {
         //public int id { get; set; }
