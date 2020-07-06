@@ -15,13 +15,13 @@ namespace Data.Repositories
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class, IEntity
     {
-        protected  DbContext DbContext;
-        public DbContext Database { get { return DbContext; }set { DbContext = value; } }
+        protected  ApplicationDbContext DbContext;
+        public ApplicationDbContext Database { get { return DbContext; }set { DbContext = value; } }
         public DbSet<TEntity> Entities { get; }
         public virtual IQueryable<TEntity> Table => Entities;
         public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
-        public Repository(DbContext dbContext)
+        public Repository(ApplicationDbContext dbContext)
         {
             DbContext = dbContext;
             Entities = DbContext.Set<TEntity>(); // City => Cities

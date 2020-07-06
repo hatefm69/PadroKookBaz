@@ -14,10 +14,11 @@ namespace Models.Shipping
     /// </summary>
     public class OrderDTO 
     {
-        public PersonDTO sender { get; set; }
-        public PersonDTO receiver { get; set; }
-     
-    
+        public PersonDTO sender { get; set; } = new PersonDTO();
+        public PersonDTO receiver { get; set; } = new PersonDTO();
+
+
+
         public string provider_code { get; set; }
         public int payment_type { get; set; }
         public string receiver_comment { get; set; }

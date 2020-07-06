@@ -12,7 +12,7 @@ namespace Entities.Padro
         public ContactType ContactType { get; set; }
         public ContactTypeEnum ContactType_Id { get; set; }
         public Person Person { get; set; }
-        public int Persion_Id { get; set; }
+        public int? Persion_Id { get; set; }
     }
     class ContactConfiguration : IEntityTypeConfiguration<Contact>
     {
@@ -24,6 +24,11 @@ namespace Entities.Padro
             builder.HasOne(z => z.ContactType).WithMany(z => z.Contacts).HasForeignKey(z => z.ContactType_Id);
 
             builder.HasOne(z => z.Person).WithMany(z => z.Contacts).HasForeignKey(z => z.Persion_Id);
+
+
+            builder.Property(z => z.Persion_Id).IsRequired(false);
+            builder.Property(z => z.Value).IsRequired(false).HasMaxLength(500);
+
         }
     }
 }

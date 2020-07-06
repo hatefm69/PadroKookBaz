@@ -1,4 +1,5 @@
 ﻿using Common;
+using Data;
 using Data.Repositories;
 using Entities.Padro;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,11 @@ namespace MyApi.Controllers.Api.v1
             _orderRepository = orderRepository;
             this.siteSettings = configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
         }
+        [HttpGet("[action]")]
+        public virtual async Task<ApiResult<InfoCityVM>> GetCities(CancellationToken cancellationToken)
+        {
+            return await new Padro(siteSettings.PordoUrl, _clientFactory).Cities(padroToken);
+        }
 
         /// <summary>
         /// ذخیره سفارش و نمایش زمان های تحویل
@@ -46,40 +52,63 @@ namespace MyApi.Controllers.Api.v1
         {
             var kookbaz = await new KookBaz(_clientFactory).getOrder(id, Token);
             model.sender.contact = kookbaz.Sender.To();
-            model.sender.name = kookbaz.Sender.fullName;
+            model.sender.name = kookbaz.Sender.fullName??"*";
 
             model.receiver.contact = kookbaz.Receiver.To();
-            model.receiver.name = kookbaz.Receiver.fullName;
+            model.receiver.name = kookbaz.Receiver.fullName??"*";
+
+            var entity = new Order
+            {
+                Sender = new Person
+                {
+                    Name = model.sender.name
+                },
+                //Receiver=new Person
+                //{
+                //    Name=model.sender.name
+                //},
+                Parcels = model.parcels.Select(x => new Parcel
+                {
+                    Content = x.content,
+                    Weight = x.weight,
+                    Height = x.dimension.height,
+                    Width = x.dimension.width,
+                    Depth = x.dimension.depth
+                }).ToList(),
+                Receiver_comment = model.receiver_comment,
+                Payment_type = model.payment_type,
+                Provider_code = model.provider_code,
+            
+                Status = "معلق"
+            };
+            await _orderRepository.AddAsync(entity, cancellationToken);
+
+            model.parcels = entity.Parcels.Select(x => new ParcelDTO
+            {
+                id = x.Id,
+                content = x.Content,
+                value = x.Value??0,
+                weight = x.Weight??0,
+                dimension = new Dimension
+                {
+                    depth = x.Depth??0,
+                    height = x.Height??0,
+                    width = x.Width??0
+                }
+            }).ToList();
+
             var padroOrders = await new Padro(siteSettings.PordoUrl, _clientFactory).orders(model, padroToken);
+
+            entity.Order_Id = padroOrders.order_id;
+           await _orderRepository.UpdateAsync(entity, cancellationToken);
+
 
             var options = await new Padro(siteSettings.PordoUrl, _clientFactory).FinalizeOrderOptions(padroOrders.order_id, Token);
 
 
 
-            _orderRepository.AddAsync(new Order
-            {
-                Sender=new Person
-                {
-                    Name=model.sender.name
-                } ,
-                //Receiver=new Person
-                //{
-                //    Name=model.sender.name
-                //},
-                Parcels = model.parcels.Select(x=>new Parcel
-                {
-                   Content=x.content,
-                    Weight=x.weight,
-                    Height=x.dimension.height,
-                    Width=x.dimension.width,
-                     Depth=x.dimension.depth
-                }).ToList(),
-                Receiver_comment = model.receiver_comment,
-                Payment_type = model.payment_type,
-                Provider_code = model.provider_code,
-                Order_Id = padroOrders.order_id,
-                Status = "معلق"
-            }, cancellationToken);
+
+
             //save order to dataBase
 
             return options;

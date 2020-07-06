@@ -20,7 +20,7 @@ namespace Data
         {
             base.OnModelCreating(modelBuilder);
 
-            var entitiesAssembly = typeof(IEntity).Assembly;
+            var entitiesAssembly = typeof(IMyEntity).Assembly;
 
             modelBuilder.RegisterAllEntities<IMyEntity>(entitiesAssembly);
             modelBuilder.RegisterEntityTypeConfiguration(entitiesAssembly);

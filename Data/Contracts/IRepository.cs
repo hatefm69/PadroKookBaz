@@ -13,7 +13,7 @@ namespace Data.Repositories
     public interface IRepository<TEntity> where TEntity : class, IEntity
     {
       
-        DbContext Database { get; set; }
+        ApplicationDbContext Database { get; set; }
         DbSet<TEntity> Entities { get; }
         IQueryable<TEntity> Table { get; }
         IQueryable<TEntity> TableNoTracking { get; }

@@ -28,6 +28,9 @@ namespace MyApi.Controllers.Api.v1
         public async Task<OrderResultVM> orders(OrderDTO model, string Token)
         {
             string url = _pordoUrl;
+            model.receiver.contact.city = "2301";
+            model.sender.contact.city = "2301";
+           
             var client = _clientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Post, url + $"/orders");
 
@@ -127,6 +130,27 @@ namespace MyApi.Controllers.Api.v1
             return false;
         }
 
+        public virtual async  Task<InfoCityVM> Cities(string Token)
+        {
+
+            string url = _pordoUrl;
+            var client = _clientFactory.CreateClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, url + $"/cities");
+
+            //var JWToken = HttpContext.Session.GetString("JWToken");
+            //if (!string.IsNullOrEmpty(JWToken))
+            {
+                request.Headers.Add("Authorization", "Bearer " + Token);
+            }
+
+            var response = await client.SendAsync(request);
+            //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            //    return Unauthorized();
+
+            var api = Newtonsoft.Json.JsonConvert.DeserializeObject<InfoCityVM>(await response.Content.ReadAsStringAsync());
+
+            return api;
+        }
     }
 
     //    /// <summary>
