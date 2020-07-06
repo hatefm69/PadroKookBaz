@@ -143,6 +143,7 @@ namespace MyApi.Controllers.Api.v1
         /// </summary>
         /// <param name="cell"></param>
         /// <returns></returns>
+       [HttpGet("[action]")]
         public async Task ViewOrders(int id)
         {
             var order = _orderRepository.Table.Where(z => z.Id == id).ToListAsync();
