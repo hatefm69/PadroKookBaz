@@ -27,7 +27,7 @@
 
 //                var result = UserManager.CreateAsync(new User
 //                {
-//                    Id=1,
+//                    Id = 1,
 //                    EmailConfirmed = false,
 //                    PhoneNumber = "989191945072",
 //                    TwoFactorEnabled = false,

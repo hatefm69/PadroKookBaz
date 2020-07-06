@@ -17,8 +17,8 @@
 //        {
 //            if (!repository.TableNoTracking.Any())
 //            {
-//                repository.Add(new Role { Name = "User" ,Description="کاربر عادی"}, false);
-//                repository.Add(new Role { Name = "Admin",Description="مدیران سایت" });
+//                repository.Add(new Role { Name = "User", Description = "کاربر عادی" }, false);
+//                repository.Add(new Role { Name = "Admin", Description = "مدیران سایت" });
 //            }
 //        }
 //    }

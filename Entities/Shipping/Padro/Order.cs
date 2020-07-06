@@ -26,6 +26,7 @@ namespace Entities.Padro
         public int? Option_id { get; set; }
         public string  Status { get; set; }
         public string Order_Id { get; set; }
+        public int KookBaz_Id { get; set; }
     }
     internal class OrderConfiguration : IEntityTypeConfiguration<Order>
     {

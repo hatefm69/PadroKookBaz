@@ -18,6 +18,7 @@ namespace Entities.Padro
         public Order Order { get; set; }
         public int? Order_Id { get; set; }
     }
+
     internal class ParcelConfiguration : IEntityTypeConfiguration<Parcel>
     {
         public void Configure(EntityTypeBuilder<Parcel> builder)

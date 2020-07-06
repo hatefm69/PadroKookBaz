@@ -57,16 +57,46 @@ namespace MyApi.Controllers.Api.v1
             model.receiver.contact = kookbaz.Receiver.To();
             model.receiver.name = kookbaz.Receiver.fullName??"*";
 
+            var sender = new Person
+            {
+                NationalCode = model.sender.contact.national_code ?? string.Empty,
+                Name = model.sender.name
+            };
+           var list= new List<Contact>();
+            list.AddRange(new[] { new Contact { ContactType_Id = ContactTypeEnum.Address, Value = model.sender.contact.address ?? string.Empty } 
+            ,
+            new Contact { ContactType_Id = ContactTypeEnum.city, Value = model.sender.contact.city ?? string.Empty }
+            ,
+            new Contact { ContactType_Id = ContactTypeEnum.Mobile, Value = model.sender.contact.phone_number ?? string.Empty }
+            ,
+            new Contact { ContactType_Id = ContactTypeEnum.Postal_code, Value = model.sender.contact.postal_code ?? string.Empty }
+            });
+            sender.Contacts = list;
+
+            var receiver=new Person
+            {
+                NationalCode=model.receiver.contact.national_code ?? string.Empty,
+                Name = model.receiver.name
+            };
+            var list2 = new List<Contact>();
+            list2.AddRange(new[]
+            {
+                new Contact { ContactType_Id = ContactTypeEnum.Address, Value = model.receiver.contact.address ?? string.Empty }
+                ,
+                new Contact { ContactType_Id = ContactTypeEnum.city, Value = model.receiver.contact.city ?? string.Empty }
+                ,
+                new Contact { ContactType_Id = ContactTypeEnum.Mobile, Value = model.receiver.contact.phone_number ?? string.Empty }
+            ,
+                new Contact { ContactType_Id = ContactTypeEnum.Postal_code, Value = model.receiver.contact.postal_code ?? string.Empty }
+            });
+
+            receiver.Contacts = list2;
+
+
             var entity = new Order
             {
-                Sender = new Person
-                {
-                    Name = model.sender.name
-                },
-                //Receiver=new Person
-                //{
-                //    Name=model.sender.name
-                //},
+                Sender = sender,
+                Receiver = receiver,
                 Parcels = model.parcels.Select(x => new Parcel
                 {
                     Content = x.content,
@@ -78,7 +108,7 @@ namespace MyApi.Controllers.Api.v1
                 Receiver_comment = model.receiver_comment,
                 Payment_type = model.payment_type,
                 Provider_code = model.provider_code,
-            
+                KookBaz_Id=id,
                 Status = "معلق"
             };
             await _orderRepository.AddAsync(entity, cancellationToken);
@@ -179,9 +209,10 @@ namespace MyApi.Controllers.Api.v1
         /// <param name="cell"></param>
         /// <returns></returns>
        [HttpGet("[action]")]
-        public async Task ViewOrders(int id)
+        public async Task<ApiResult<IEnumerable<ordervm2>>> ViewOrders(int id)
         {
-            var order = _orderRepository.Table.Where(z => z.Id == id).ToListAsync();
+            var orders =await _orderRepository.Table.Where(z => z.KookBaz_Id == id).Include(z=>z.Sender).ThenInclude(z=>z.Contacts).Include(z=>z.Receiver).ThenInclude(z=>z.Contacts).Include(z=>z.Parcels).Select(z=> ordervm2.FromEntity(z)).ToListAsync();
+            return orders;
             //show Orders
         }
     }
