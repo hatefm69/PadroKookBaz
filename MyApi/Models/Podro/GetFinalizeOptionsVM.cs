@@ -13,6 +13,7 @@ namespace MyApi.Models.Podro
 
     public class GetFinalizeOptionsVM
     {
+        public string Order_Id { get; set; }
         public IEnumerable<Option> Options { get; set; }
         public IEnumerable<Available_option>  Available_Options   { get; set; }
     }
@@ -33,7 +34,7 @@ namespace MyApi.Models.Podro
 
     public class finalizeDTO
     {
-        public DateTime Pickup_date { get; set; }
+        public string Pickup_date { get; set; }
         public int Option_id { get; set; }
         public string Comment { get; set; }
     }

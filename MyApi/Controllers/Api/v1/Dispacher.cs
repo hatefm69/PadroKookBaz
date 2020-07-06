@@ -96,15 +96,17 @@ namespace MyApi.Controllers.Api.v1
                     width = x.Width??0
                 }
             }).ToList();
-
+            model.receiver.contact.national_code = kookbaz.Receiver.nationalCode ?? "0018862470";
+            model.sender.contact.national_code = kookbaz.Sender.nationalCode ?? "0018862470";
             var padroOrders = await new Padro(siteSettings.PordoUrl, _clientFactory).orders(model, padroToken);
 
             entity.Order_Id = padroOrders.order_id;
            await _orderRepository.UpdateAsync(entity, cancellationToken);
 
 
-            var options = await new Padro(siteSettings.PordoUrl, _clientFactory).FinalizeOrderOptions(padroOrders.order_id, Token);
+            var options = await new Padro(siteSettings.PordoUrl, _clientFactory).FinalizeOrderOptions(padroOrders.order_id, padroToken);
 
+            options.Data.Order_Id = entity.Order_Id;
 
 
 
@@ -139,7 +141,11 @@ namespace MyApi.Controllers.Api.v1
         {
             //save State
             var order = _orderRepository.Table.FirstOrDefault(z => z.Order_Id == id);
-            order.Pickup_date_Dm = model.Pickup_date;
+            if(!DateTime.TryParse(model.Pickup_date, out var date))
+            {
+                return BadRequest("تاریخ ارسالی صحیح نمی باشد.");
+            }
+            order.Pickup_date_Dm = date;
             order.Option_id = model.Option_id;
             order.Status = "نهایی";
             order.Comment = model.Comment;

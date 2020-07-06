@@ -108,7 +108,8 @@ namespace MyApi.Controllers.Api.v1
             var response = await client.SendAsync(request);
             //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             //    return Unauthorized();
-
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                return null;
             var api = Newtonsoft.Json.JsonConvert.DeserializeObject<PostFinalizeVM>(await response.Content.ReadAsStringAsync());
             return api;
         }
