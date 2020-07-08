@@ -1,8 +1,12 @@
 ﻿using Common.Utilities;
+using Data.Contracts;
 using Entities;
 //using Entities.User;
 //using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -10,8 +14,10 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext, IUnitOfWork
     {
+        private IDbContextTransaction _transaction;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -32,28 +38,50 @@ namespace Data
 
         public override int SaveChanges()
         {
+            ChangeTracker.DetectChanges(); //NOTE: changeTracker.Entries<T>() will call it automatically.  
+            ChangeTracker.AutoDetectChangesEnabled = false; // for performance reasons, to avoid calling DetectChanges() again.
             _cleanString();
-            return base.SaveChanges();
+            var result = base.SaveChanges();
+            ChangeTracker.AutoDetectChangesEnabled = true;
+            return result;
         }
-
+        //public override int SaveChanges()
+        //{
+        //    ChangeTracker.DetectChanges(); //NOTE: changeTracker.Entries<T>() will call it automatically.  
+        //    ChangeTracker.AutoDetectChangesEnabled = false; // for performance reasons, to avoid calling DetectChanges() again.
+        //    var result = base.SaveChanges();
+        //    ChangeTracker.AutoDetectChangesEnabled = true;
+        //    return result;
+        //}
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
+            ChangeTracker.DetectChanges();
+            ChangeTracker.AutoDetectChangesEnabled = false; // for performance reasons, to avoid calling DetectChanges() again.
             _cleanString();
-            return base.SaveChanges(acceptAllChangesOnSuccess);
+            var result= base.SaveChanges(acceptAllChangesOnSuccess);
+            ChangeTracker.AutoDetectChangesEnabled = true;
+            return result;
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
+            ChangeTracker.DetectChanges();
+            ChangeTracker.AutoDetectChangesEnabled = false; // for performance reasons, to avoid calling DetectChanges() again.
             _cleanString();
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-        }
+            var result = base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            ChangeTracker.AutoDetectChangesEnabled = true;
+            return result;
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        }  
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
+            ChangeTracker.DetectChanges();
+            ChangeTracker.AutoDetectChangesEnabled = false; // for performance reasons, to avoid calling DetectChanges() again.
             _cleanString();
-            return base.SaveChangesAsync(cancellationToken);
+            var result = base.SaveChangesAsync(cancellationToken);
+            ChangeTracker.AutoDetectChangesEnabled = true;
+            return result;
         }
-
         private void _cleanString()
         {
             var changedEntities = ChangeTracker.Entries()
@@ -80,6 +108,57 @@ namespace Data
                     }
                 }
             }
+        }
+
+        public void BeginTransaction()
+        {
+            _transaction = Database.BeginTransaction();
+        }
+
+        public void RollbackTransaction()
+        {
+            if (_transaction == null)
+            {
+                throw new NullReferenceException("Please call `BeginTransaction()` method first.");
+            }
+            _transaction.Rollback();
+        }
+
+        public void CommitTransaction()
+        {
+            if (_transaction == null)
+            {
+                throw new NullReferenceException("Please call `BeginTransaction()` method first.");
+            }
+            _transaction.Commit();
+        }
+
+        public void AddRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        {
+            Set<TEntity>().AddRange(entities);
+        }
+
+        public void RemoveRange<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
+        {
+            Set<TEntity>().RemoveRange(entities);
+        }
+
+        public void MarkAsChanged<TEntity>(TEntity entity) where TEntity : class
+        {
+            Update(entity);
+        }
+        public override void Dispose()
+        {
+            _transaction?.Dispose();
+            base.Dispose();
+        }
+        public int SaveAllChanges()
+        {
+            return base.SaveChanges();
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }
