@@ -1,4 +1,5 @@
-﻿using Data.Contracts;
+﻿using Common;
+using Data.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,15 @@ using ViewModels;
 namespace Services.Services.BS
 {
 
-    public class KookBazService
+    public class KookBazService : IKookBazService, IScopedDependency
     {
+        private readonly string _token = @"de4txc/vHR5DMYOrKEz7fw==_DYHc1xvlxHnEPJ_3Mb3vkdZX3WxcHDZEdTkag==_JkaB6aBAbdT5Qu9ABRwGKQqaySeIJHvQX5OHbdqSyCM=";
         private readonly IHttpClientFactory _clientFactory;
         public KookBazService(IHttpClientFactory clientFactory)
         {
             _clientFactory = clientFactory;
         }
-        public async Task<KookBazOrderVM> getOrder(int id, string Token)
+        public async Task<KookBazOrderVM> getOrder(int id)
         {
             string url = "http://api.kookbaz98.ir";
             var client = _clientFactory.CreateClient();
@@ -26,7 +28,7 @@ namespace Services.Services.BS
             //var JWToken = HttpContext.Session.GetString("JWToken");
             //if (!string.IsNullOrEmpty(JWToken))
             {
-                request.Headers.Add("Authorization", "Bearer " + Token);
+                request.Headers.Add("Authorization", "Bearer " + _token);
             }
 
             var response = await client.SendAsync(request);
