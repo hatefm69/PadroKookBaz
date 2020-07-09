@@ -109,7 +109,7 @@ namespace Services.Services.BS
                 content = x.Content,
                 value = x.Value ?? 0,
                 weight = x.Weight ?? 0,
-                dimension = new Dimension
+                dimension = new DimensionDTO
                 {
                     depth = x.Depth ?? 0,
                     height = x.Height ?? 0,
@@ -128,7 +128,7 @@ namespace Services.Services.BS
             return options;
         }
 
-        public async Task<ServiceResult<PostFinalizeVM>> FinalizeOrder(string id, finalizeDTO model, CancellationToken cancellationToken)
+        public async Task<ServiceResult<PostFinalizeVM>> FinalizeOrder(string id, FinalizeDTO model, CancellationToken cancellationToken)
         {
             //save State
             var order = _orders.FirstOrDefault(z => z.Order_Id == id);
@@ -157,9 +157,9 @@ namespace Services.Services.BS
 
             return new ServiceResult(false, ApiResultStatusCode.NotFound);
         }
-        public async Task<ServiceResult<IEnumerable<ordervm2>>> ViewOrders(int id)
+        public async Task<ServiceResult<IEnumerable<Ordervm2>>> ViewOrders(int id)
         {
-            var orders = await _orders.Where(z => z.KookBaz_Id == id).Include(z => z.Sender).ThenInclude(z => z.Contacts).ThenInclude(z => z.ContactType).Include(z => z.Receiver).ThenInclude(z => z.Contacts).Include(z => z.Parcels).Select(z => ordervm2.FromEntity(z)).ToListAsync();
+            var orders = await _orders.Where(z => z.KookBaz_Id == id).Include(z => z.Sender).ThenInclude(z => z.Contacts).ThenInclude(z => z.ContactType).Include(z => z.Receiver).ThenInclude(z => z.Contacts).Include(z => z.Parcels).Select(z => Ordervm2.FromEntity(z)).ToListAsync();
             return orders;
             //show Orders
         }

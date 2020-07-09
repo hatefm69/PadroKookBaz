@@ -12,19 +12,10 @@ namespace ViewModels
         public int id { get; set; }
         public int weight { get; set; }
         public decimal value { get; set; }
-        public Dimension dimension { get; set; }
+        public DimensionDTO dimension { get; set; }
         public string content { get; set; }
 
         //public OrderDTO Order { get; set; }
         //public int Order_Id { get; set; }
-    }
-    /// <summary>
-    /// خصوصيات كالا
-    /// </summary>
-    public class Dimension
-    {
-        public int width { get; set; }
-        public int height { get; set; }
-        public int depth { get; set; }
     }
 }

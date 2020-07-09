@@ -87,7 +87,7 @@ namespace Services.Services.BS
             return api;
         }
 
-        public async Task<PostFinalizeVM> FinalizeOrder(string id, finalizeDTO model)
+        public async Task<PostFinalizeVM> FinalizeOrder(string id, FinalizeDTO model)
         {
 
             string url = siteSettings.PordoUrl;

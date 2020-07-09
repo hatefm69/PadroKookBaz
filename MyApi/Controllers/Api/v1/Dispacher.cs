@@ -74,7 +74,7 @@ namespace MyApi.Controllers.Api.v1
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpPost("[action]")]
-        public async Task<ApiResult<PostFinalizeVM>> FinalizeOrder(string id, finalizeDTO model, CancellationToken cancellationToken)
+        public async Task<ApiResult<PostFinalizeVM>> FinalizeOrder(string id, FinalizeDTO model, CancellationToken cancellationToken)
         {
 
             var t= await _dispacherService.FinalizeOrder(id, model, cancellationToken);

@@ -4,12 +4,6 @@ using System.Text;
 
 namespace ViewModels
 {
-
-    public class DeliveryOptionVM
-    {
-        public IEnumerable<Quote> Quotes { get; set; }
-    }
-
     public class Quote
     {
         public string Provider_name { get; set; }
