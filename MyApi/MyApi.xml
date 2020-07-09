@@ -4,7 +4,7 @@
         <name>MyApi</name>
     </assembly>
     <members>
-        <member name="M:MyApi.Controllers.Api.v1.DispacherController.SaveOrder(System.Int32,Models.Shipping.OrderDTO,System.Threading.CancellationToken)">
+        <member name="M:MyApi.Controllers.Api.v1.DispacherController.SaveOrder(System.Int32,ViewModels.OrderDTO,System.Threading.CancellationToken)">
             <summary>
             ذخیره سفارش و نمایش زمان های تحویل
             </summary>
@@ -13,7 +13,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:MyApi.Controllers.Api.v1.DispacherController.GetCost(MyApi.Models.Shipping.Padro.Delivery_optionsDTO,System.Threading.CancellationToken)">
+        <member name="M:MyApi.Controllers.Api.v1.DispacherController.GetCost(ViewModels.Delivery_optionsDTO,System.Threading.CancellationToken)">
             <summary>
             نمایش کرایه بار شرکت ها
             </summary>
@@ -21,7 +21,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:MyApi.Controllers.Api.v1.DispacherController.FinalizeOrder(System.String,MyApi.Models.Podro.finalizeDTO,System.Threading.CancellationToken)">
+        <member name="M:MyApi.Controllers.Api.v1.DispacherController.FinalizeOrder(System.String,ViewModels.FinalizeDTO,System.Threading.CancellationToken)">
             <summary>
             فاینالی کردن سفارش
             </summary>
@@ -45,11 +45,6 @@
             <param name="cell"></param>
             <returns></returns>
         </member>
-        <member name="T:MyApi.Models.Shipping.Padro.Delivery_optionsDTO">
-            <summary>
-            بارگذاري گزينه هاي ارسال كالا 
-            </summary>
-        </member>
         <member name="T:Models.Shipping.ContactDTO">
             <summary>
             جدول اطلاعات تماس
@@ -58,26 +53,6 @@
         <member name="T:Models.Shipping.ContactTypeDTO">
             <summary>
             جدول نوع اطلاعات تماس
-            </summary>
-        </member>
-        <member name="T:Models.Shipping.OrderDTO">
-            <summary>
-            جدول بیجک
-            </summary>
-        </member>
-        <member name="T:Models.Shipping.ParcelDTO">
-            <summary>
-            جدول جزئیات و کالاهای بیجک
-            </summary>
-        </member>
-        <member name="T:Models.Shipping.Dimension">
-            <summary>
-            خصوصيات كالا
-            </summary>
-        </member>
-        <member name="T:Models.Shipping.PersonDTO">
-            <summary>
-            جدول مشتریان
             </summary>
         </member>
     </members>

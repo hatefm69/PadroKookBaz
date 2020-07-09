@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ViewModels.AutoMapepr;
 using WebFramework.Filters;
 
 namespace WebFramework.Api

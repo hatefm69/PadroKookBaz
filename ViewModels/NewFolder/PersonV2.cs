@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Entities.Padro;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModels.AutoMapepr;
 
 namespace ViewModels
 {
  
-    public class PersonV2 //: BaseDto<PersonV2, Person>
+    public class PersonV2 : BaseDto<PersonV2, Person>
     {
         public string Name { get; set; }
         public IEnumerable<ContactVM> Contacts { get; set; }

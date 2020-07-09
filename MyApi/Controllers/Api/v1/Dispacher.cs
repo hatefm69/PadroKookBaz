@@ -106,7 +106,7 @@ namespace MyApi.Controllers.Api.v1
         /// <param name="cell"></param>
         /// <returns></returns>
        [HttpGet("[action]")]
-        public async Task<ApiResult<IEnumerable<ordervm2>>> ViewOrders(int id)
+        public async Task<ApiResult<IEnumerable<Ordervm2>>> ViewOrders(int id)
         {
 
             var orders = await _dispacherService.ViewOrders(id);

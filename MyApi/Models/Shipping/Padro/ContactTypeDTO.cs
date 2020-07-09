@@ -1,5 +1,6 @@
 ﻿using Entities.Padro;
 using System.Collections.Generic;
+using ViewModels.AutoMapepr;
 using WebFramework.Api;
 
 namespace Models.Shipping

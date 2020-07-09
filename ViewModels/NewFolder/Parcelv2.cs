@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Entities.Padro;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModels.AutoMapepr;
 
 namespace ViewModels
 {
-    public class Parcelv2 //: BaseDto<Parcelv2, Parcel>
+    public class Parcelv2 : BaseDto<Parcelv2, Parcel>
     {
         //public int id { get; set; }
         public int? Weight { get; set; }

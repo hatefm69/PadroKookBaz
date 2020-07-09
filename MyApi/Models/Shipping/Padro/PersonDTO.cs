@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using WebFramework.Api;
+using ViewModels.AutoMapepr;
 
 namespace Models.Shipping
 {

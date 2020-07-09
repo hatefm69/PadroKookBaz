@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Entities.Padro;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using ViewModels.AutoMapepr;
 
 namespace ViewModels
 {
-    public class Ordervm2 : WebFramework.Api.BaseDto<ordervm2, Order>
+    public class Ordervm2 :BaseDto<Ordervm2, Order>
     {
         public PersonV2 Receiver { get; set; }
         public int? Receiver_Id { get; set; }

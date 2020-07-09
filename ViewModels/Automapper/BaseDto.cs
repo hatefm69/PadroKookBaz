@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
+using Entities;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using ViewModels.AutoMapepr;
 
-namespace WebFramework.Api
+namespace ViewModels.AutoMapepr
 {
- 
-    public abstract class BaseServiceDto<TDto, TEntity, TKey> : IHaveCustomMapping
-    where TDto : class, new()
-    where TEntity :class, new()
+    public abstract class BaseDto<TDto, TEntity, TKey> : IHaveCustomMapping
+        where TDto : class, new()
+        where TEntity : BaseEntity<TKey>, new()
     {
         [Display(Name = "ردیف")]
         public TKey Id { get; set; }
@@ -41,7 +37,7 @@ namespace WebFramework.Api
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<TDto>(json);
         }
-        protected TDto CastToDerivedClass(BaseServiceDto<TDto, TEntity, TKey> baseInstance)
+        protected TDto CastToDerivedClass(BaseDto<TDto, TEntity, TKey> baseInstance)
         {
             return Mapper.Map<TDto>(baseInstance);
         }
@@ -65,8 +61,8 @@ namespace WebFramework.Api
             //        mappingExpression.ForMember(property.Name, opt => opt.Ignore());
             //}
 
-            CustomMappings(mappingExpression.ReverseMap());
-            CustomMappingsReverse(mappingExpressionReverse.ReverseMap());
+            CustomMappings(mappingExpressionReverse);
+            CustomMappingsReverse(mappingExpression);
         }
 
         public virtual void CustomMappings(IMappingExpression<TEntity, TDto> mapping)
@@ -77,14 +73,11 @@ namespace WebFramework.Api
         }
     }
 
-    
+    public abstract class BaseDto<TDto, TEntity> : BaseDto<TDto, TEntity, int>
+        where TDto : class, new()
+        where TEntity : BaseEntity<int>, new()
+    {
 
-    //public abstract class BaseServiceDto<TDto, TEntity, TKey> : BaseDto<TDto, TEntity, TKey>
-    //where TDto : class, new()
-    //where TEntity : class, new()
-    //    where TKey:int
-
-    //{
-
-    //}
+    }
+  
 }

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebFramework.Configuration;
-using WebFramework.CustomMapping;
 using WebFramework.Middlewares;
 using WebFramework.Swagger;
 using Hangfire;
@@ -13,6 +12,7 @@ using WebFramework.Session;
 using WebFramework.React;
 using Microsoft.AspNetCore.Http;
 using ElmahCore.Mvc;
+using ViewModels.AutoMapepr;
 
 namespace MyApi
 {
