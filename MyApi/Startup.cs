@@ -15,6 +15,7 @@ using ElmahCore.Mvc;
 using ViewModels.AutoMapepr;
 using Data.Contracts;
 using Data;
+using Microsoft.Extensions.Hosting;
 
 namespace MyApi
 {
@@ -91,7 +92,7 @@ namespace MyApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //if (env.IsProduction())
             //    app.UseResponseCaching();

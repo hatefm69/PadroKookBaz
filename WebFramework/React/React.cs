@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace WebFramework.React
 {
@@ -16,7 +17,7 @@ namespace WebFramework.React
             });
 
         }
-        public static void UseReactPage(this IApplicationBuilder app, IHostingEnvironment env)
+        public static void UseReactPage(this IApplicationBuilder app, IWebHostEnvironment env)
         {
 
             app.UseSpaStaticFiles();

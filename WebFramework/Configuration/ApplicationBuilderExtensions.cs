@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Services.DataInitializer;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace WebFramework.Configuration
 {
     public static class ApplicationBuilderExtensions
     {
-        public static void UseHsts(this IApplicationBuilder app, IHostingEnvironment env)
+        public static void UseHsts(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             Assert.NotNull(app, nameof(app));
             Assert.NotNull(env, nameof(env));

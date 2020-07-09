@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using WebFramework.Api;
 using Newtonsoft.Json.Serialization;
 using System.Linq;
+using Microsoft.Extensions.Hosting;
 
 namespace WebFramework.Middlewares
 {
@@ -35,11 +36,11 @@ namespace WebFramework.Middlewares
     public class CustomExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
 
         public CustomExceptionHandlerMiddleware(RequestDelegate next,
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             ILogger<CustomExceptionHandlerMiddleware> logger)
         {
             _next = next;
