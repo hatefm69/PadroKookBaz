@@ -1,4 +1,5 @@
-﻿using Entities.Padro;
+﻿using AutoMapper;
+using Entities.Padro;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -13,6 +13,8 @@ using WebFramework.React;
 using Microsoft.AspNetCore.Http;
 using ElmahCore.Mvc;
 using ViewModels.AutoMapepr;
+using Data.Contracts;
+using Data;
 
 namespace MyApi
 {
@@ -33,6 +35,7 @@ namespace MyApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
             services.AddHttpClient();
             //services.AddResponseCaching();
 

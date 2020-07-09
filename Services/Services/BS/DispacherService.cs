@@ -101,7 +101,6 @@ namespace Services.Services.BS
                 KookBaz_Id = id,
                 Status = "معلق"
             };
-            await _orders.AddAsync(entity, cancellationToken);
 
             model.parcels = entity.Parcels.Select(x => new ParcelDTO
             {
@@ -121,7 +120,9 @@ namespace Services.Services.BS
             var padroOrders = await new PadroService(_configuration, _clientFactory).orders(model);
 
             entity.Order_Id = padroOrders.order_id;
-            _orders.Update(entity);
+            await _orders.AddAsync(entity, cancellationToken);
+            await _uow.SaveChangesAsync();
+            //_orders.Update(entity);
             var options = await new PadroService(_configuration, _clientFactory).FinalizeOrderOptions(padroOrders.order_id);
 
             options.Order_Id = entity.Order_Id;

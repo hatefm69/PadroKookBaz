@@ -20,7 +20,8 @@ namespace ViewModels.AutoMapepr
 
         public static void AddCustomMappingProfile(this IMapperConfigurationExpression config)
         {
-            config.AddCustomMappingProfile(Assembly.GetEntryAssembly());
+            var viewModelsAssembly = typeof(IHaveCustomMapping).Assembly;
+            config.AddCustomMappingProfile(Assembly.GetEntryAssembly(), viewModelsAssembly);
         }
 
         public static void AddCustomMappingProfile(this IMapperConfigurationExpression config, params Assembly[] assemblies)

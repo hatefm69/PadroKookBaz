@@ -22,35 +22,22 @@
     <Compile Remove="Models\Tree\**" />
     <Compile Remove="ServerApp\**" />
     <Compile Remove="weatherclient\**" />
-    <Compile Remove="wwwroot\Elmahlogs\**" />
     <Content Remove="Models\DetailPart\**" />
     <Content Remove="Models\Tree\**" />
     <Content Remove="ServerApp\**" />
     <Content Remove="weatherclient\**" />
-    <Content Remove="wwwroot\Elmahlogs\**" />
     <EmbeddedResource Remove="Models\DetailPart\**" />
     <EmbeddedResource Remove="Models\Tree\**" />
     <EmbeddedResource Remove="ServerApp\**" />
     <EmbeddedResource Remove="weatherclient\**" />
-    <EmbeddedResource Remove="wwwroot\Elmahlogs\**" />
     <None Remove="Models\DetailPart\**" />
     <None Remove="Models\Tree\**" />
     <None Remove="ServerApp\**" />
     <None Remove="weatherclient\**" />
-    <None Remove="wwwroot\Elmahlogs\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="appsettings.Production.json" CopyToPublishDirectory="Always" />
-    <None Include="Views\Shared\Error.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Views\Shared\_LayoutWithHeader.cshtml" />
-    <None Include="Views\Shared\_LayoutWithHeaderTemp.cshtml" />
-    <None Include="Views\Shared\_LayoutWithoutHeader.cshtml" />
-    <None Include="Views\Shared\_LoginPartial.cshtml" />
-    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="Views\_ViewImports.cshtml" />
-    <None Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   
   
