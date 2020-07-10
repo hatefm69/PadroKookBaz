@@ -4,6 +4,7 @@ using Entities.Padro;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +25,15 @@ namespace Services.Services.BS
         private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _configuration;
         private readonly SiteSettings siteSettings;
-
+        private readonly IHostingEnvironment _env;
         private readonly IUnitOfWork _uow;
         private readonly DbSet<Order> _orders;
 
-        public DispacherService(IHttpClientFactory clientFactory, IConfiguration configuration, IUnitOfWork uow)
+        public DispacherService(IHttpClientFactory clientFactory, IConfiguration configuration, IUnitOfWork uow, IHostingEnvironment env)
         {
             _configuration = configuration;
             this.siteSettings = configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
+            _env = env;
             _clientFactory = clientFactory;
             _uow = uow ?? throw new ArgumentNullException(nameof(_uow));
 
@@ -117,13 +119,13 @@ namespace Services.Services.BS
             }).ToList();
             model.receiver.contact.national_code = kookbaz.Receiver.nationalCode ?? "0018862470";
             model.sender.contact.national_code = kookbaz.Sender.nationalCode ?? "0018862470";
-            var padroOrders = await new PadroService(_configuration, _clientFactory).orders(model);
+            var padroOrders = await new PadroService(_configuration, _clientFactory, _env).orders(model);
 
             entity.Order_Id = padroOrders.order_id;
             await _orders.AddAsync(entity, cancellationToken);
             await _uow.SaveChangesAsync();
             //_orders.Update(entity);
-            var options = await new PadroService(_configuration, _clientFactory).FinalizeOrderOptions(padroOrders.order_id);
+            var options = await new PadroService(_configuration, _clientFactory, _env).FinalizeOrderOptions(padroOrders.order_id);
 
             options.Order_Id = entity.Order_Id;
             return options;
@@ -142,12 +144,12 @@ namespace Services.Services.BS
             order.Status = "نهایی";
             order.Comment = model.Comment;
             _orders.Update(order);
-            return await new PadroService(_configuration, _clientFactory).FinalizeOrder(id, model);
+            return await new PadroService(_configuration, _clientFactory,_env).FinalizeOrder(id, model);
         }
 
         public virtual async Task<ServiceResult> CancelOrder(string id, CancellationToken cancellationToken)
         {
-            var result = await new PadroService(_configuration, _clientFactory).CancelOrder(id);
+            var result = await new PadroService(_configuration, _clientFactory, _env).CancelOrder(id);
             if (result)
             {
                 //save state

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using ViewModels;
+using ViewModels.PadroModel;
 
 namespace Services.Services.BS
 {
@@ -11,5 +12,6 @@ namespace Services.Services.BS
         Task<PostFinalizeVM> FinalizeOrder(string id, FinalizeDTO model);
         Task<GetFinalizeOptionsVM> FinalizeOrderOptions(string id);
         Task<OrderResultVM> orders(OrderDTO model);
+        Task Login(LoginModel model);
     }
 }

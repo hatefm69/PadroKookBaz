@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.Services.BS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ViewModels;
+using ViewModels.PadroModel;
 using WebFramework.Api;
 
 namespace MyApi.Controllers.Api.v1
@@ -27,7 +29,11 @@ namespace MyApi.Controllers.Api.v1
         {
             return await _padroService.Cities();
         }
-
+        [HttpPost("[action]")]
+        public virtual async Task LoginPadro(LoginModel model,CancellationToken cancellationToken)
+        {
+            await _padroService.Login(model);
+        }
         /// <summary>
         /// ذخیره سفارش و نمایش زمان های تحویل
         /// </summary>
