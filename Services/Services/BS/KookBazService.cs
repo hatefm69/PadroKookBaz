@@ -1,104 +1,91 @@
 ﻿using Common;
+using Common.Utilities;
 using Data.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using ViewModels;
+using ViewModels.KookBazModel;
 
 namespace Services.Services.BS
 {
 
     public class KookBazService : IKookBazService, IScopedDependency
     {
-        private readonly string _token = @"de4txc/vHR5DMYOrKEz7fw==_DYHc1xvlxHnEPJ_3Mb3vkdZX3WxcHDZEdTkag==_JkaB6aBAbdT5Qu9ABRwGKQqaySeIJHvQX5OHbdqSyCM=";
+        private readonly string _token;//= @"de4txc/vHR5DMYOrKEz7fw==_DYHc1xvlxHnEPJ_3Mb3vkdZX3WxcHDZEdTkag==_JkaB6aBAbdT5Qu9ABRwGKQqaySeIJHvQX5OHbdqSyCM=";
+        private readonly string _token2 = @"de4txc/vHR5DMYOrKEz7fw==_DYHc1xvlxHnEPJ_3Mb3vkdZX3WxcHDZEdTkag==_JkaB6aBAbdT5Qu9ABRwGKQqaySeIJHvQX5OHbdqSyCM=";
+        private readonly SiteSettings siteSettings;
         private readonly IHttpClientFactory _clientFactory;
-        public KookBazService(IHttpClientFactory clientFactory)
+        private readonly IHostingEnvironment _env;
+
+        public KookBazService(IHttpClientFactory clientFactory, IHostingEnvironment env, IConfiguration configuration)
         {
+            this.siteSettings = configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
             _clientFactory = clientFactory;
+            _env = env;
+            _token = openToken()?.sessionId;
+        }
+
+        public async Task Login(LoginModel model)
+        {
+            string url = siteSettings.KookBazUrl;
+
+            var client = _clientFactory.CreateClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, url + $"/usermanagement/v2/account/login");
+
+            //var formVariables = new List<KeyValuePair<string, string>>();
+
+            //formVariables.Add(new KeyValuePair<string, string>("cell", model.cell));
+            //formVariables.Add(new KeyValuePair<string, string>("password", model.password));
+
+            //FormUrlEncodedContent content = new FormUrlEncodedContent(formVariables);
+            StringContent content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            request.Headers.Add("Authorization", "Bearer " + _token2);
+            request.Content = content;
+
+            var response = await client.SendAsync(request);
+
+            var api = Newtonsoft.Json.JsonConvert.DeserializeObject<KookBazModelToken>(await response.Content.ReadAsStringAsync());
+
+            saveToken(api);
+
+            return;
+        }
+
+        private void saveToken(KookBazModelToken model)
+        {
+            model.sessionId = model.sessionId.Replace("Bearer ", "");
+            System.IO.File.WriteAllText(_env.ContentRootPath + "/PadroConfig/kookBazToken.txt", model.ToJson());
+        }
+        private KookBazModelToken openToken()
+        {
+            if (System.IO.File.Exists(_env.ContentRootPath + "/PadroConfig/kookBazToken.txt"))
+            {
+                var json = System.IO.File.ReadAllText(_env.ContentRootPath + "/PadroConfig/kookBazToken.txt");
+                return json.FromJson<KookBazModelToken>();
+            }
+            return null;
+
         }
         public async Task<KookBazOrderVM> getOrder(int id)
         {
-            string url = "http://api.kookbaz98.ir";
+            string url = siteSettings.KookBazUrl;
             var client = _clientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Get, url + $"/paymentmanagement/v2/orders/{id}");
-
-            //var JWToken = HttpContext.Session.GetString("JWToken");
-            //if (!string.IsNullOrEmpty(JWToken))
             {
                 request.Headers.Add("Authorization", "Bearer " + _token);
             }
 
             var response = await client.SendAsync(request);
-            //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            //    return Unauthorized();
 
             var api = Newtonsoft.Json.JsonConvert.DeserializeObject<KookBazOrderVM>(await response.Content.ReadAsStringAsync());
 
             return api;
         }
     }
-
-
-
-
-    //public interface IAnswerService
-    //{
-    //    void AddAnswer(AddAnswerModel answer);
-    //    AnswerModel GetAnswers(long OrderId);
-    //}
-
-    //public class AnswerService : IAnswerService
-    //{
-    //    private readonly IUnitOfWork _uow;
-    //    private readonly DbSet<Answer> _answers;
-    //    private readonly DbSet<Option> _options;
-    //    private readonly DbSet<Question> _questions;
-
-    //    public AnswerService(IUnitOfWork uow)
-    //    {
-    //        _uow = uow ?? throw new ArgumentNullException(nameof(_uow));
-
-    //        _answers = _uow.Set<Answer>();
-    //        _options = _uow.Set<Option>();
-    //        _questions = _uow.Set<Question>();
-    //    }
-
-    //    public void AddAnswer(AddAnswerModel model)
-    //    {
-    //        Answer answer = new Answer()
-    //        {
-    //            OptionId = model.OptionId,
-    //            OrderId = model.OrderId
-    //        };
-    //        _answers.Add(answer);
-    //        _uow.SaveChanges();
-    //    }
-    //    public AnswerModel GetAnswers(long OrderId)
-    //    {
-
-    //        var query = (from a in _answers.Where(x => x.OrderId == OrderId)
-    //                     join o in _options
-    //                         on a.OptionId equals o.OptionId
-    //                     join q in _questions
-    //                         on o.QuestionId equals q.QuestionId
-    //                     select new QuestionsAnswerModel
-    //                     {
-    //                         QuestionId = q.QuestionId,
-    //                         Questions = q.Questions,
-    //                         Answer = o.Options
-    //                     }).ToList();
-
-
-    //        AnswerModel answer = new AnswerModel()
-    //        {
-    //            OrderId = OrderId,
-    //            questionsAnswers = query
-    //        };
-
-    //        return answer;
-    //    }
-    //}
 }

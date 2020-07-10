@@ -42,7 +42,7 @@ namespace Services.Services.BS
         }
         public virtual async Task<GetFinalizeOptionsVM> SaveOrder(int id, OrderDTO model, CancellationToken cancellationToken)
         {
-            var kookbaz = await new KookBazService(_clientFactory).getOrder(id);
+            var kookbaz = await new KookBazService(_clientFactory,_env,_configuration).getOrder(id);
             model.sender.contact = kookbaz.Sender.To();
             model.sender.name = kookbaz.Sender.fullName ?? "*";
 

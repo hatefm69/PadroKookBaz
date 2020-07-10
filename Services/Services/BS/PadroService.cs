@@ -24,15 +24,12 @@ namespace Services.Services.BS
             this.siteSettings = configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
             _clientFactory = clientFactory;
 
-
             _env = env;
             Token = openToken()?.access_token;
         }
 
         public async Task Login(LoginModel model)
         {
-          
-
             string url = siteSettings.PordoUrl;
           
             var client = _clientFactory.CreateClient();
@@ -46,31 +43,13 @@ namespace Services.Services.BS
             FormUrlEncodedContent content = new FormUrlEncodedContent(formVariables);
             request.Content = content;
 
-            //var content = new MultipartFormDataContent();
-
-            //StringContent stringContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-            //content.Add(stringContent);
-
-            //request.Content = content;
-
-            //request.Headers.Add("Authorization", "Bearer " + Token);
-            //request.Headers.Add("Accept", "application/json");
-            // request.Headers.Add("Content-Type", "application/json");
-
             var response = await client.SendAsync(request);
-            //if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            //    return Unauthorized();
 
             var api = Newtonsoft.Json.JsonConvert.DeserializeObject<PadroToken>(await response.Content.ReadAsStringAsync());
 
             saveToken(api);
 
-
-
             return;
-
-            
-
         }
         private void saveToken(PadroToken model)
         {

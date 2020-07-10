@@ -34,6 +34,11 @@ namespace MyApi.Controllers.Api.v1
         {
             await _padroService.Login(model);
         }
+        [HttpPost("[action]")]
+        public virtual async Task LoginKookBaz(ViewModels.KookBazModel.LoginModel model, CancellationToken cancellationToken)
+        {
+            await _kookBazService.Login(model);
+        }
         /// <summary>
         /// ذخیره سفارش و نمایش زمان های تحویل
         /// </summary>

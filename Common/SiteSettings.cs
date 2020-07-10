@@ -10,6 +10,7 @@
         public string PassKeyEncrypt { get; set; }
         public RabbitOptions RabbitMQSettings { get; set; }
         public string PordoUrl { get; set; }
+        public string KookBazUrl { get; set; }
     }
 
     public class IdentitySettings
