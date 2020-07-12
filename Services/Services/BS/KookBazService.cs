@@ -18,7 +18,8 @@ namespace Services.Services.BS
     public class KookBazService : IKookBazService, IScopedDependency
     {
         private readonly string _token;//= @"de4txc/vHR5DMYOrKEz7fw==_DYHc1xvlxHnEPJ_3Mb3vkdZX3WxcHDZEdTkag==_JkaB6aBAbdT5Qu9ABRwGKQqaySeIJHvQX5OHbdqSyCM=";
-        private readonly string _token2 = @"de4txc/vHR5DMYOrKEz7fw==_DYHc1xvlxHnEPJ_3Mb3vkdZX3WxcHDZEdTkag==_JkaB6aBAbdT5Qu9ABRwGKQqaySeIJHvQX5OHbdqSyCM=";
+        //private readonly string _token2 = @"de4txc/vHR5DMYOrKEz7fw==_DYHc1xvlxHnEPJ_3Mb3vkdZX3WxcHDZEdTkag==_JkaB6aBAbdT5Qu9ABRwGKQqaySeIJHvQX5OHbdqSyCM=";
+        private readonly string _x_clientId = @"cloudware:app:3SSbr35BHPXXKExNL4zRHwHF7Sdo8I4xMTrEgVci";
         private readonly SiteSettings siteSettings;
         private readonly IHttpClientFactory _clientFactory;
         private readonly IHostingEnvironment _env;
@@ -45,7 +46,7 @@ namespace Services.Services.BS
 
             //FormUrlEncodedContent content = new FormUrlEncodedContent(formVariables);
             StringContent content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-            request.Headers.Add("Authorization", "Bearer " + _token2);
+            request.Headers.Add("x-clientId", _x_clientId);
             request.Content = content;
 
             var response = await client.SendAsync(request);
